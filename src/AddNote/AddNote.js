@@ -11,13 +11,13 @@ export default class AddNote extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      content: '',
+      name: 'Name',
+      content: 'Content',
       folderId: '',
-      nameValid: false,
-      contentValid: false,
+      nameValid: true,
+      contentValid: true,
       folderIdValid: true,
-      formValid: false,
+      formValid: true,
       validationMessages: {
         name: '',
       }
@@ -163,14 +163,14 @@ export default class AddNote extends Component {
             <label htmlFor='note-name-input'>
               Name
             </label>
-            <input type='text' id='note-name-input' name='note-name' onChange={e => this.updateName(e.target.value)}/>
+            <input type='text' id='note-name-input' name='note-name' defaultValue='name' onChange={e => this.updateName(e.target.value)}/>
             <ValidationError hasError={!this.state.nameValid} message={this.state.validationMessages.name}/>  
           </div>
           <div className='field'>
             <label htmlFor='note-content-input'>
               Content
             </label>
-            <textarea id='note-content-input' name='note-content' onChange={e => this.updateContent(e.target.value)}/>
+            <textarea id='note-content-input' name='note-content' defaultValue='Note Content' onChange={e => this.updateContent(e.target.value)}/>
             <ValidationError hasError={!this.state.contentValid} message={this.state.validationMessages.content}/>  
           </div>
           <div className='field'>
