@@ -4,15 +4,15 @@ import ApiContext from '../ApiContext'
 import config from '../config'
 import './AddFolder.css'
 import ValidationError from '../ValidationError.js'
-
+import PropTypes from 'prop-types';
 
 export default class AddFolder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      nameValid: false,
-      formValid: false,
+      name: 'Folder',
+      nameValid: true,
+      formValid: true,
       validationMessages: {
         name: '',
       }
@@ -27,6 +27,7 @@ export default class AddFolder extends Component {
 
   updateName(name) {
     this.setState({name}, () => {this.validateName(name)});
+    console.log(this.state.props);
   }
   validateName(fieldValue) {
     const fieldErrors = {...this.state.validationMessages};
@@ -38,7 +39,7 @@ export default class AddFolder extends Component {
       hasError = true;
     } else {
       if(/[^a-zA-Z]/.test(fieldValue)){
-        fieldErrors.name = 'Folder name must be letters only';
+        fieldErrors.name = 'Folder name must be letters only. No Spaces.';
         hasError = true;
       } else {
         fieldErrors.name = '';
@@ -99,11 +100,11 @@ export default class AddFolder extends Component {
             <label htmlFor='folder-name-input'>
               Name
             </label>
-            <input type='text' id='folder-name-input' name='folder-name' onChange={e => this.updateName(e.target.value)}/>
+            <input type='text' id='folder-name-input' name='folder-name' defaultValue='Folder' onChange={e => this.updateName(e.target.value)}/>
             <ValidationError hasError={!this.state.nameValid} message={this.state.validationMessages.name}/>  
           </div>
           <div className='buttons'>
-            <button type="submit" className="addFolder__button" disabled={!this.state.formValid}>
+            <button type="submit" className="addFolder__button">
               Add folder
             </button>
           </div>
@@ -111,7 +112,12 @@ export default class AddFolder extends Component {
       </section>
     )
   }
-  
 }
 
+AddFolder.propTypes = {
+  name: PropTypes.string.isRequired
+};
 
+AddFolder.defaultProps = {
+  name: 'Folder'
+};
