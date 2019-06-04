@@ -100,8 +100,17 @@ export default class AddFolder extends Component {
             <label htmlFor='folder-name-input'>
               Name
             </label>
-            <input type='text' id='folder-name-input' name='folder-name' defaultValue='Folder' onChange={e => this.updateName(e.target.value)}/>
-            <ValidationError hasError={!this.state.nameValid} message={this.state.validationMessages.name}/>  
+            <input 
+              type='text' 
+              id='folder-name-input' 
+              name='folder-name' 
+              defaultValue='Folder' 
+              onChange={e => this.updateName(e.target.value)} 
+              aria-label='Folder Name Input'
+              aria-required='true'
+              aria-describedby='folderNameErr'
+            />
+            <ValidationError hasError={!this.state.nameValid} message={this.state.validationMessages.name} id='folderNameErr'/>  
           </div>
           <div className='buttons'>
             <button type="submit" className="addFolder__button">
