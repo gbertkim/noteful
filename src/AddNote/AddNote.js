@@ -107,7 +107,7 @@ export default class AddNote extends Component {
 
     fieldValue = fieldValue.trim();
     if(fieldValue.length === 0) {
-      fieldErrors.content = 'Name is required';
+      fieldErrors.content = 'Content is required';
       hasError = true;
     } else {
       if (fieldValue.length < 3) {
@@ -163,14 +163,29 @@ export default class AddNote extends Component {
             <label htmlFor='note-name-input'>
               Name
             </label>
-            <input type='text' id='note-name-input' name='note-name' defaultValue='name' onChange={e => this.updateName(e.target.value)}/>
+            <input 
+              type='text'
+              id='note-name-input' 
+              name='note-name' 
+              defaultValue='name' 
+              onChange={e => this.updateName(e.target.value)} 
+              aria-label='Note Name Input'
+              aria-required='true'
+            />
             <ValidationError hasError={!this.state.nameValid} message={this.state.validationMessages.name}/>  
           </div>
           <div className='field'>
             <label htmlFor='note-content-input'>
               Content
             </label>
-            <textarea id='note-content-input' name='note-content' defaultValue='Note Content' onChange={e => this.updateContent(e.target.value)}/>
+            <textarea 
+              id='note-content-input' 
+              name='note-content' 
+              defaultValue='Note Content' 
+              onChange={e => this.updateContent(e.target.value)} 
+              aria-label='Note Content Input'
+              aria-required='true'
+            />
             <ValidationError hasError={!this.state.contentValid} message={this.state.validationMessages.content}/>  
           </div>
           <div className='field'>
